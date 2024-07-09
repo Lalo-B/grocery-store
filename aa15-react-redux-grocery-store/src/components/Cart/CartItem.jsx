@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { removeFromCart } from '../../store/cart';
-import { useDispatch } from 'react-redux';
+import { addOne, minusOne, removeFromCart } from '../../store/cart';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function CartItem({ item }) {
-  const [count, setCount] = useState(item.count);
+  // const [count, setCount] = useState(item.count);
   const dispatch = useDispatch();
-  console.log(item)
+  // console.log(item)
 
-  useEffect(() => {
-    setCount(item.count);
-  }, [item.count]);
+  const count = useSelector(state=>state.cart[item.id].count);
+
+  // useEffect(() => {
+  //   setCount(item.count);
+  // }, [item.count]);
 
   return (
     <li className="cart-item">
@@ -21,11 +24,13 @@ function CartItem({ item }) {
         />
         <button
           className="cart-item-button"
-        >
+          onClick={()=>{dispatch(addOne(item.id))}}
+          >
           +
         </button>
         <button
           className="cart-item-button"
+          onClick={()=>{dispatch(minusOne(item.id))}}
         >
           -
         </button>
