@@ -1,5 +1,15 @@
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/cart";
+
 function ProduceDetails({ produce }) {
-  const cartItem = {};
+  // console.log("🚀 ~ ProduceDetails ~ produce:", produce)
+  const [cartItem, setCartItem] = useState({});
+  const dispatch = useDispatch();
+
+  // useEffect(()=>{
+  //   dispatch(addToCart())
+  // },[dispatch])
 
   return (
     <li className="produce-details">
@@ -11,6 +21,7 @@ function ProduceDetails({ produce }) {
           <i className={"fas fa-heart"} />
         </button>
         <button
+          onClick={()=>{dispatch(addToCart(produce.id))}}
           className={"plus-button" + (cartItem ? " selected" : "")}
         >
           <i className="fas fa-plus" />
