@@ -9,14 +9,8 @@ export const addToCart = (produceId) => {
 export function cartReducer(state = {}, action) {
     switch (action.type) {
         case ADD_TO_CART: {
-            // console.log('action nnnnnnnn', action)
-            // console.log("🚀 ~ cartReducer ~ state:", state)
-            const produceId = action.produceId
-            const newnewstate = {
-                ...state,
-                
-            }
-
+            const newState = {...state};
+            newState[action.produceId] = {id: action.produceId, count: 1}
             return newState
         }
         default:
